@@ -1,0 +1,27 @@
+subprojects {
+    apply plugin: "java"
+    
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.4.2'
+        testRuntime group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.4.2'
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+}
+
+
+project(':lexer') {
+    dependencies {}
+}
+
+project(':parser') {
+    dependencies {
+        compile project(":lexer")
+    }
+}

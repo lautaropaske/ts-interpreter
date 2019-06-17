@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="tp3.lexer.main" target="1.8" />
+      <module name="tp3.lexer.test" target="1.8" />
+      <module name="tp3.main" target="1.8" />
+      <module name="tp3.parser.main" target="1.8" />
+      <module name="tp3.parser.test" target="1.8" />
+      <module name="tp3.test" target="1.8" />
+      <module name="ts-interpreter.main" target="1.8" />
+      <module name="ts-interpreter.test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
