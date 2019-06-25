@@ -1,11 +1,21 @@
 package tokens;
 
 public enum TokenType {
-    IDENTIFIER,
-    NUM_LITERAL,
+    L_PAREN,
+    SEMICOLON,
+    R_PAREN,
+    EQUALS,
+    LET,
     STR_LITERAL,
+    IDENTIFIER,
+    SUM,
+    MINUS,
+    MULTIPLY,
+    NUM_LITERAL,
+    DIVIDE,
+    PRINT,
     UNKNOWN,
-    KEYWORD,
-    SYMBOL,
-    DELIMITER
+    NEW_LINE,
+    SPACE,
+    COLON,
 }

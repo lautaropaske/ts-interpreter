@@ -3,14 +3,16 @@ package lexer;
 import javafx.util.Pair;
 import tokens.Token;
 import tokens.TokenFactory;
-import utils.Utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LexerImpl implements Lexer {
 
+    private final List<String> SYMBOL_LIST = Arrays.asList("=", "+", "-", "*", "/", "(", ")", ";", ":");
+    private final List<String> DELIMITER_LIST = Arrays.asList(" ", "\n");
     private TokenFactory tokenFactory;
 
     public LexerImpl(){
@@ -62,7 +64,7 @@ public class LexerImpl implements Lexer {
         List<Character> acc = new ArrayList<>();
 
         for (char c: file.toCharArray()) {
-            if (Utils.DELIMITER_LIST.contains(String.valueOf(c)) || Utils.SYMBOL_LIST.contains(String.valueOf(c))) {         // You found a delimiter/symbol
+            if (DELIMITER_LIST.contains(String.valueOf(c)) || SYMBOL_LIST.contains(String.valueOf(c))) {         // You found a delimiter/symbol
                 if(!acc.isEmpty()) {
                     possibleTokens.add(asString(acc));                  // This means you are closing an accumulated word. Add word to list
                     acc = new ArrayList<>();                            // Restart accumulator

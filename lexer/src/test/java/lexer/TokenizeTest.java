@@ -15,18 +15,18 @@ public class TokenizeTest {
 
     @Test
     public void tokenizeAnAssignation() {
-        String line = "let foo = 5;";
+        String line = "let foo = \"word\";";
         List<Token> tokens = this.lexer.tokenize(line);
 
         List<TokenType> expectedTokens = Arrays.asList(
-                TokenType.KEYWORD,
-                TokenType.DELIMITER,
+                TokenType.LET,
+                TokenType.SPACE,
                 TokenType.IDENTIFIER,
-                TokenType.DELIMITER,
-                TokenType.SYMBOL,
-                TokenType.DELIMITER,
-                TokenType.NUM_LITERAL,
-                TokenType.SYMBOL
+                TokenType.SPACE,
+                TokenType.EQUALS,
+                TokenType.SPACE,
+                TokenType.STR_LITERAL,
+                TokenType.SEMICOLON
         );
 
         assertTokens(expectedTokens, tokens);
@@ -38,21 +38,21 @@ public class TokenizeTest {
         List<Token> tokens = this.lexer.tokenize(line);
 
         List<TokenType> expectedTokens = Arrays.asList(
-                TokenType.KEYWORD,      // 1st line
-                TokenType.DELIMITER,
+                TokenType.LET,      // 1st line
+                TokenType.SPACE,
                 TokenType.IDENTIFIER,
-                TokenType.DELIMITER,
-                TokenType.SYMBOL,
-                TokenType.DELIMITER,
+                TokenType.SPACE,
+                TokenType.EQUALS,
+                TokenType.SPACE,
                 TokenType.NUM_LITERAL,
-                TokenType.SYMBOL,
-                TokenType.DELIMITER,    // 2nd line
+                TokenType.SEMICOLON,
+                TokenType.NEW_LINE,    // 2nd line
                 TokenType.IDENTIFIER,
-                TokenType.DELIMITER,
-                TokenType.SYMBOL,
-                TokenType.DELIMITER,
+                TokenType.SPACE,
+                TokenType.EQUALS,
+                TokenType.SPACE,
                 TokenType.NUM_LITERAL,
-                TokenType.SYMBOL
+                TokenType.SEMICOLON
 
         );
 
@@ -65,18 +65,18 @@ public class TokenizeTest {
         List<Token> tokens = this.lexer.tokenize(line);
 
         List<TokenType> expectedTokens = Arrays.asList(
-                TokenType.KEYWORD,      // let
-                TokenType.DELIMITER,    //
+                TokenType.LET,      // let
+                TokenType.SPACE,    //
                 TokenType.IDENTIFIER,   // foo
-                TokenType.DELIMITER,    //
-                TokenType.SYMBOL,       // :
-                TokenType.DELIMITER,    //
+                TokenType.SPACE,    //
+                TokenType.COLON,       // :
+                TokenType.SPACE,    //
                 TokenType.IDENTIFIER,   // string
-                TokenType.DELIMITER,    //
-                TokenType.SYMBOL,       // =
-                TokenType.DELIMITER,    //
+                TokenType.SPACE,    //
+                TokenType.EQUALS,       // =
+                TokenType.SPACE,    //
                 TokenType.STR_LITERAL,  // 'test'
-                TokenType.SYMBOL        // ;
+                TokenType.SEMICOLON        // ;
 
         );
 
@@ -107,6 +107,45 @@ public class TokenizeTest {
         );
 
         assertCoordinates(expectedCoordinates, tokens);
+    }
+
+    @Test
+    public void tokenizeDecimals() {
+        String line = "let foo = .90;";
+
+        List<Token> fstTokens = this.lexer.tokenize(line);
+
+        List<TokenType> fstExpectedTokens = Arrays.asList(
+                TokenType.LET,      // let
+                TokenType.SPACE,    //
+                TokenType.IDENTIFIER,   // foo
+                TokenType.SPACE,    //
+                TokenType.EQUALS,       // =
+                TokenType.SPACE,    //
+                TokenType.NUM_LITERAL,  // .90
+                TokenType.SEMICOLON        // ;
+
+        );
+
+        assertTokens(fstExpectedTokens, fstTokens);
+
+        String lineWithNatural = "let foo = 7.90;";
+
+        List<Token> sndTokens = this.lexer.tokenize(lineWithNatural);
+
+        List<TokenType> sndExpectedTokens = Arrays.asList(
+                TokenType.LET,      // let
+                TokenType.SPACE,    //
+                TokenType.IDENTIFIER,   // foo
+                TokenType.SPACE,    //
+                TokenType.EQUALS,       // =
+                TokenType.SPACE,    //
+                TokenType.NUM_LITERAL,  // 7.90
+                TokenType.SEMICOLON        // ;
+
+        );
+
+        assertTokens(sndExpectedTokens, sndTokens);
     }
 
     private void assertTokens(List<TokenType> expectedTokens, List<Token> tokens) {
