@@ -14,5 +14,5 @@ public interface Lexer {
      * @param file a text file converted to string properly separated by the ' ' character (whitespace)
      * @return a list of the tokens contained in the file, in lexical order
      */
-    List<Token> tokenize(String file);
+    List<Token> lex(String file);
 }

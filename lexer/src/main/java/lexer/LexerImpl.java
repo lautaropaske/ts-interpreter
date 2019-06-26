@@ -20,7 +20,7 @@ public class LexerImpl implements Lexer {
     }
 
     @Override
-    public List<Token> tokenize(String file) {
+    public List<Token> lex(String file) {
         return mapToToken(splitPossibleTokens(file));
     }
 

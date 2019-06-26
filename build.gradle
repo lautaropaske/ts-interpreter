@@ -25,3 +25,18 @@ project(':parser') {
         compile project(":lexer")
     }
 }
+
+project(':interpreter') {
+    dependencies {
+        compile project(":lexer")
+        compile project(":parser")
+    }
+}
+
+project(':executor') {
+    dependencies {
+        compile project(":lexer")
+        compile project(":parser")
+        compile project(":interpreter")
+    }
+}

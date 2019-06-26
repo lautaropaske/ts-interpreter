@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+      </profile>
+    </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="interpreter" target="1.5" />
+      <module name="tp3.executor.main" target="1.8" />
+      <module name="tp3.executor.test" target="1.8" />
+      <module name="tp3.interpreter.main" target="1.8" />
+      <module name="tp3.interpreter.test" target="1.8" />
       <module name="tp3.lexer.main" target="1.8" />
       <module name="tp3.lexer.test" target="1.8" />
       <module name="tp3.main" target="1.8" />
+      <module name="tp3.main.main" target="1.8" />
+      <module name="tp3.main.test" target="1.8" />
       <module name="tp3.parser.main" target="1.8" />
       <module name="tp3.parser.test" target="1.8" />
       <module name="tp3.test" target="1.8" />

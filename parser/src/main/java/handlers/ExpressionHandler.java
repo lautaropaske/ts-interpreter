@@ -17,14 +17,14 @@ public class ExpressionHandler extends Handler {
                 () -> parseBinaryExpression(TokenType.MINUS, expression).orElseGet(
                         () -> parseBinaryExpression(TokenType.MULTIPLY, expression).orElseGet(
                                 () -> parseBinaryExpression(TokenType.DIVIDE, expression).orElseGet(
-                                        ()-> parseIndentifierOrLiteral(expression)
+                                        ()-> parseIdentifierOrLiteral(expression)
                                )
                        )
                 )
         );
     }
 
-    private ASTNode parseIndentifierOrLiteral(List<Token> expression) {
+    private ASTNode parseIdentifierOrLiteral(List<Token> expression) {
         Token token = expression.get(0);
         if(Arrays.asList(TokenType.NUM_LITERAL, TokenType.STR_LITERAL).contains(expression.get(0).getType())) return new Literal(Type.from(token), token.getValue());
         if(TokenType.IDENTIFIER == token.getType()) return new Identifier(token.getValue());

@@ -3,6 +3,12 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/tp3.iml" filepath="$PROJECT_DIR$/.idea/tp3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/executor/tp3.executor.iml" filepath="$PROJECT_DIR$/.idea/modules/executor/tp3.executor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/executor/tp3.executor.main.iml" filepath="$PROJECT_DIR$/.idea/modules/executor/tp3.executor.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/executor/tp3.executor.test.iml" filepath="$PROJECT_DIR$/.idea/modules/executor/tp3.executor.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/interpreter/tp3.interpreter.iml" filepath="$PROJECT_DIR$/.idea/modules/interpreter/tp3.interpreter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/interpreter/tp3.interpreter.main.iml" filepath="$PROJECT_DIR$/.idea/modules/interpreter/tp3.interpreter.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/interpreter/tp3.interpreter.test.iml" filepath="$PROJECT_DIR$/.idea/modules/interpreter/tp3.interpreter.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lexer/tp3.lexer.iml" filepath="$PROJECT_DIR$/.idea/modules/lexer/tp3.lexer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lexer/tp3.lexer.main.iml" filepath="$PROJECT_DIR$/.idea/modules/lexer/tp3.lexer.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lexer/tp3.lexer.test.iml" filepath="$PROJECT_DIR$/.idea/modules/lexer/tp3.lexer.test.iml" />

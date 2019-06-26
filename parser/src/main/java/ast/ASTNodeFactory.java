@@ -1,21 +1,24 @@
 package ast;
 
 import exceptions.ParserException;
-import handlers.AssignationHandler;
-import handlers.DeclarationAssignationHandler;
-import handlers.DeclarationHandler;
-import handlers.PrintHandler;
+import handlers.*;
 import tokens.Token;
 import tokens.TokenType;
 
 import java.util.List;
 
 public class ASTNodeFactory {
-    private DeclarationHandler declarationHandler;
-    private AssignationHandler assignationHandler;
-    private DeclarationAssignationHandler declarationAssignationHandler;
-    private PrintHandler printHandler;
+    private Handler declarationHandler;
+    private Handler assignationHandler;
+    private Handler declarationAssignationHandler;
+    private Handler printHandler;
 
+    public ASTNodeFactory(){
+        this.declarationHandler = new DeclarationHandler();
+        this.assignationHandler = new AssignationHandler();
+        this.declarationAssignationHandler = new DeclarationAssignationHandler();
+        this.printHandler = new PrintHandler();
+    }
 
     public ASTNode getNode(List<Token> statement) {
         switch (statement.get(0).getType()) {
