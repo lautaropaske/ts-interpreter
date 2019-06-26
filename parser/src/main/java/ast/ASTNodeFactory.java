@@ -11,16 +11,16 @@ import tokens.TokenType;
 import java.util.List;
 
 public class ASTNodeFactory {
-    DeclarationHandler declarationHandler;
-    AssignationHandler assignationHandler;
-    DeclarationAssignationHandler declarationAssignationHandler;
-    PrintHandler printHandler;
+    private DeclarationHandler declarationHandler;
+    private AssignationHandler assignationHandler;
+    private DeclarationAssignationHandler declarationAssignationHandler;
+    private PrintHandler printHandler;
 
 
     public ASTNode getNode(List<Token> statement) {
         switch (statement.get(0).getType()) {
             case LET:
-                if(statement.get(3).getType() == TokenType.SEMICOLON) return declarationHandler.handle(statement);
+                if(statement.get(3).getType() == TokenType.SEMICOLON) return declarationHandler.handle(statement); // If 4th token is not an 'equals' but a semicolon, means we're only in a declaration
                 return declarationAssignationHandler.handle(statement);
             case IDENTIFIER:
                 return assignationHandler.handle(statement);
