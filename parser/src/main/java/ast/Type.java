@@ -19,8 +19,8 @@ public enum Type {
 
     public static boolean isValid(String value) {
         return Stream.of(Type.values())
-                .map(Type::name)
-                .collect(Collectors.toList())
-                .contains(value);
+                     .map(Type::name)
+                     .collect(Collectors.toList())
+                     .contains(value);
     }
 }

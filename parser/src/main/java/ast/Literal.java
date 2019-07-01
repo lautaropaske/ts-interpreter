@@ -1,9 +1,9 @@
 package ast;
 
-import java.util.Collections;
-import java.util.List;
 
-public class Literal implements ASTNode{
+import java.util.Map;
+
+public class Literal implements ASTExpression{
     private Type type;
     private String value;
 
@@ -12,21 +12,16 @@ public class Literal implements ASTNode{
         this.value = value;
     }
 
-    @Override
-    public List<ASTNode> getChildren() {
-        return Collections.emptyList();
-    }
-
-    @Override
-    public void accept(ASTVisitor visitor) {
-        visitor.accept(this);
-    }
-
     public Type getType() {
         return type;
     }
 
     public String getValue() {
         return value;
+    }
+
+    @Override
+    public Object accept(ASTExpressionVisitor visitor, Map<String, Object> programMemory) {
+        return visitor.visit(this);
     }
 }

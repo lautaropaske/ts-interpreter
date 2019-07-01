@@ -1,22 +1,16 @@
 package ast;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class PrintStatement implements ASTNode {
-    private ASTNode printable;
+    private ASTExpression printable;
 
-    public PrintStatement(ASTNode printable) {
+    public PrintStatement(ASTExpression printable) {
         this.printable = printable;
     }
 
     @Override
-    public List<ASTNode> getChildren() {
-        return Arrays.asList(printable);
+    public void accept(ASTVisitor visitor) {
+        visitor.visit(this);
     }
 
-    @Override
-    public void accept(ASTVisitor visitor) {
-        visitor.accept(this);
-    }
+    public ASTExpression getPrintable(){ return printable;}
 }

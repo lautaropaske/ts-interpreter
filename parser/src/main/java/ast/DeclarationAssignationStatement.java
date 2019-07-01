@@ -1,27 +1,31 @@
 package ast;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class DeclarationAssignationStatement implements ASTNode {
 
-    private ASTNode identifier;
+    private Identifier identifier;
     private Type type;
-    private ASTNode value;
+    private ASTExpression expression;
 
-    public DeclarationAssignationStatement(ASTNode identifier, Type type, ASTNode value) {
+    public DeclarationAssignationStatement(Identifier identifier, Type type, ASTExpression expression) {
         this.identifier = identifier;
         this.type = type;
-        this.value = value;
-    }
-
-    @Override
-    public List<ASTNode> getChildren() {
-        return Arrays.asList(identifier, value);
+        this.expression = expression;
     }
 
     @Override
     public void accept(ASTVisitor visitor) {
-        visitor.accept(this);
+        visitor.visit(this);
+    }
+
+    public Identifier getIdentifier() {
+        return identifier;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public ASTExpression getExpression() {
+        return expression;
     }
 }

@@ -10,7 +10,6 @@ public abstract class Handler {
     Rule rule;
 
     public ASTNode handle(List<Token> statement){
-        rule.validate(statement);
         return parseNode(statement);
     }
 

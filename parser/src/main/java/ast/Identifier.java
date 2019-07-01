@@ -1,27 +1,20 @@
 package ast;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.Map;
 
-public class Identifier implements ASTNode {
+public class Identifier implements ASTExpression {
     private String value;
 
     public Identifier(String value) {
         this.value = value;
     }
 
-
-    @Override
-    public List<ASTNode> getChildren() {
-        return Collections.emptyList();
-    }
-
-    @Override
-    public void accept(ASTVisitor visitor) {
-        visitor.accept(this);
-    }
-
     public String getValue() {
         return value;
+    }
+
+    @Override
+    public Object accept(ASTExpressionVisitor visitor, Map<String, Object> programMemory) {
+        return null;
     }
 }
