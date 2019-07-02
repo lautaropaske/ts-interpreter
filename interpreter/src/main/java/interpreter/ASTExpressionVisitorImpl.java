@@ -6,7 +6,7 @@ import utils.Definitions;
 
 import java.util.Map;
 
-public class ExpressionVisitor implements ASTExpressionVisitor {
+public class ASTExpressionVisitorImpl implements ASTExpressionVisitor {
 
     @Override
     public Object visit(Literal literal) {

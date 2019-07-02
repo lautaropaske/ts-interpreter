@@ -82,7 +82,7 @@ public class InterpreterTest {
 
     @Test
     public void pass_hardTest() {
-        String line = "let foo: string=\"foo string: \"; let bar :number; \n " +
+        String line = "let bar :number; let foo: string=\"foo string: \"; \n " +
                       "print(foo);" +
                       "bar = 10/2 + 5; \n" +
                       "print(foo + bar + \' - baz\'); \n";

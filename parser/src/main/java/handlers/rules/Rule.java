@@ -53,6 +53,8 @@ public interface Rule {
     }
 
     default void isDeclaration(List<Token> statement, boolean fromDeclarationAssignation){
+        if(statement.size() < 4) throw new ParserException("Invalid statement", statement.get(0).getCoordinates()[0], statement.get(0).getCoordinates()[1]);
+
         boolean t1 = statement.get(1).getType() == TokenType.IDENTIFIER;
         boolean t2 = statement.get(2).getType() == TokenType.COLON;
         boolean t3 = statement.get(3).getType() == TokenType.IDENTIFIER && Type.isValid(statement.get(3).getValue());

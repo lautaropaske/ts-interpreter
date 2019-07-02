@@ -13,7 +13,7 @@ public class ASTVisitorImpl implements ASTVisitor {
 
     ASTVisitorImpl(){
         this.programMemory = new HashMap<>();
-        this.expVisitor = new ExpressionVisitor();
+        this.expVisitor = new ASTExpressionVisitorImpl();
     }
 
     @Override
@@ -49,6 +49,9 @@ public class ASTVisitorImpl implements ASTVisitor {
         throw new InterpreterException("Invalid type: " + expressionResult + " is not a " + type.name());
     }
 
+    @Override
+    public void visit(Program program) { for (ASTNode child : program.getStatements()) child.accept(this); }
+
     private boolean isCorrectType(Type type, Object expressionResult) {
         if(type.name().equals("number")) {
             String rs = expressionResult.toString();
@@ -57,7 +60,4 @@ public class ASTVisitorImpl implements ASTVisitor {
 
         return type.name().equals("string") && expressionResult.toString().matches(Definitions.STR_LITERAL_REGEX);
     }
-
-    @Override
-    public void visit(Program program) { for (ASTNode child : program.getStatements()) child.accept(this); }
 }
