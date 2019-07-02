@@ -20,6 +20,7 @@ public class InterpreterTest {
 
         ASTNode ast = this.parser.parse(lexer.lex(line));
 
+        System.out.println("\n\n### EXPECTING SUCCESS ###");
         interpreter.interpret(ast);
 
         String line2 = "let foo : string = 'valid assignation';\n" +
@@ -27,6 +28,7 @@ public class InterpreterTest {
 
         ASTNode ast2 = this.parser.parse(lexer.lex(line2));
 
+        System.out.println("\n\n### EXPECTING SUCCESS ###");
         interpreter.interpret(ast2);
     }
 
@@ -36,9 +38,12 @@ public class InterpreterTest {
 
         ASTNode ast = this.parser.parse(lexer.lex(line));
         try {
+            System.out.println("\n\n### EXPECTING AN EXCEPTION ###");
             interpreter.interpret(ast);
         } catch (InterpreterException ex) {
+            System.out.println("### EXPECTED EXCEPTION ###\n\n");
             ex.printStackTrace();
+            System.out.println("\n");
         }
     }
 
@@ -49,8 +54,10 @@ public class InterpreterTest {
         ASTNode ast = this.parser.parse(lexer.lex(line));
 
         try {
+            System.out.println("\n\n### EXPECTING AN EXCEPTION ###");
             interpreter.interpret(ast);
         } catch (InterpreterException ex) {
+            System.out.println("### EXPECTED EXCEPTION ###\n\n");
             ex.printStackTrace();
         }
     }
@@ -63,6 +70,7 @@ public class InterpreterTest {
 
         ASTNode ast = this.parser.parse(lexer.lex(line));
 
+        System.out.println("\n\n### EXPECTING SUCCESS ###");
         interpreter.interpret(ast);
     }
 
@@ -74,8 +82,10 @@ public class InterpreterTest {
         ASTNode ast = this.parser.parse(lexer.lex(line));
 
         try {
+            System.out.println("\n\n### EXPECTING AN EXCEPTION ###");
             interpreter.interpret(ast);
         } catch (InterpreterException ex) {
+            System.out.println("### EXPECTED EXCEPTION ###\n\n");
             ex.printStackTrace();
         }
     }
@@ -89,6 +99,7 @@ public class InterpreterTest {
 
         ASTNode ast = this.parser.parse(lexer.lex(line));
 
+        System.out.println("\n\n### EXPECTING SUCCESS ###");
         interpreter.interpret(ast);
     }
 }
