@@ -1,5 +1,6 @@
 package handlers;
 
+import ast.ASTExpression;
 import ast.ASTNode;
 import ast.AssignationStatement;
 import ast.Identifier;
@@ -8,7 +9,7 @@ import tokens.Token;
 
 import java.util.List;
 
-public class AssignationHandler extends Handler {
+public class AssignationHandler extends Handler<ASTNode> {
 
     private ExpressionHandler expressionHandler;
 
@@ -20,7 +21,7 @@ public class AssignationHandler extends Handler {
     @Override
     protected ASTNode parseNode(List<Token> statement) {
         Identifier identifier = new Identifier(statement.get(0).getValue());
-        ASTNode value = expressionHandler.handle(statement);
+        ASTExpression value = expressionHandler.handle(statement.subList(2,statement.size()));
         return new AssignationStatement(identifier, value);
     }
 }

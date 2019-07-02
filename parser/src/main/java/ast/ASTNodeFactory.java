@@ -8,10 +8,10 @@ import tokens.TokenType;
 import java.util.List;
 
 public class ASTNodeFactory {
-    private Handler declarationHandler;
-    private Handler assignationHandler;
-    private Handler declarationAssignationHandler;
-    private Handler printHandler;
+    private Handler<ASTNode> declarationHandler;
+    private Handler<ASTNode> assignationHandler;
+    private Handler<ASTNode> declarationAssignationHandler;
+    private Handler<ASTNode> printHandler;
 
     public ASTNodeFactory(){
         this.declarationHandler = new DeclarationHandler();
@@ -21,16 +21,23 @@ public class ASTNodeFactory {
     }
 
     public ASTNode getNode(List<Token> statement) {
-        switch (statement.get(0).getType()) {
+        Token firstToken = statement.get(0);
+
+        switch (firstToken.getType()) {
             case LET:
-                if(statement.get(3).getType() == TokenType.SEMICOLON) return declarationHandler.handle(statement); // If 4th token is not an 'equals' but a semicolon, means we're only in a declaration
-                return declarationAssignationHandler.handle(statement);
+                if(statement.size() < 5) {
+                    return declarationHandler.handle(statement); // If 5th token is not an 'equals', means we're only in a declaration
+                } else if (statement.get(4).getType() == TokenType.EQUALS){
+                    return declarationAssignationHandler.handle(statement);
+                }
+                break;
             case IDENTIFIER:
                 return assignationHandler.handle(statement);
             case PRINT:
                 return printHandler.handle(statement);
             default:
-                throw new ParserException("Invalid statement", statement.get(0).getCoordinates()[0] , statement.get(0).getCoordinates()[1]);
+                throw new ParserException("Invalid statement", firstToken.getCoordinates()[0] , firstToken.getCoordinates()[1]);
         }
+        throw new ParserException("Invalid statement", firstToken.getCoordinates()[0] , firstToken.getCoordinates()[1]);
     }
 }

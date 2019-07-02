@@ -30,6 +30,7 @@ public class ParserImpl implements Parser {
         List<Token> acc = new ArrayList<>();
 
         for(Token t : tokens){
+            if(t.getType() == TokenType.SPACE) continue;
             if(t.getType() == TokenType.SEMICOLON || t.getType() == TokenType.NEW_LINE){
                 if(!acc.isEmpty()){
                     statements.add(acc);

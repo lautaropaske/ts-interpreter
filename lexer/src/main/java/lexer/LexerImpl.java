@@ -1,8 +1,10 @@
 package lexer;
 
+import exceptions.LexerException;
 import javafx.util.Pair;
 import tokens.Token;
 import tokens.TokenFactory;
+import utils.Definitions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,6 +15,7 @@ public class LexerImpl implements Lexer {
 
     private final List<String> SYMBOL_LIST = Arrays.asList("=", "+", "-", "*", "/", "(", ")", ";", ":");
     private final List<String> DELIMITER_LIST = Arrays.asList(" ", "\n");
+    private final List<String> STRING_SYMBOL_LIST = Arrays.asList("\"", "\'");
     private TokenFactory tokenFactory;
 
     public LexerImpl(){
@@ -24,8 +27,9 @@ public class LexerImpl implements Lexer {
         return mapToToken(splitPossibleTokens(file));
     }
 
-    private List<Token> mapToToken(List<String> splatFile) {
-        List<Pair<String, int[]>> assignedCoordinates = assignCoordinates(splatFile);
+    private List<Token> mapToToken(List<String> possibleTokens) {
+        if(possibleTokens.contains("-")) possibleTokens = joinNegatives(possibleTokens);
+        List<Pair<String, int[]>> assignedCoordinates = assignCoordinates(possibleTokens);
 
         return assignedCoordinates.stream()
                                   .map( pair -> tokenFactory.getTokenFor(pair.getKey(), pair.getValue()))
@@ -62,19 +66,34 @@ public class LexerImpl implements Lexer {
     private List<String> splitPossibleTokens(String file) {
         List<String> possibleTokens = new ArrayList<>();
         List<Character> acc = new ArrayList<>();
+        String stringSymbol = null;
 
         for (char c: file.toCharArray()) {
-            if (DELIMITER_LIST.contains(String.valueOf(c)) || SYMBOL_LIST.contains(String.valueOf(c))) {         // You found a delimiter/symbol
+            String character = String.valueOf(c);
+
+            if ((DELIMITER_LIST.contains(character) || SYMBOL_LIST.contains(character)) && stringSymbol == null) {      // You found a delimiter/symbol
                 if(!acc.isEmpty()) {
-                    possibleTokens.add(asString(acc));                  // This means you are closing an accumulated word. Add word to list
-                    acc = new ArrayList<>();                            // Restart accumulator
+                    possibleTokens.add(asString(acc));                                                                  // This means you are closing an accumulated word. Add word to list
+                    acc = new ArrayList<>();                                                                            // Restart accumulator
                 }
-                possibleTokens.add(String.valueOf(c));                  // Then add whitespace/symbol
-            } else {                                                    // If you didn't find whitespace/symbol, you found a character
-                acc.add(c);                                             // Accumulate character
+                possibleTokens.add(character);                                                                          // Then add delimiter/symbol
+            } else {                                                                                                    // If you didn't find delimiter/symbol, you found a character
+                if(STRING_SYMBOL_LIST.contains(character)){                                                             // If you found a string delimiter, you might be entering a string literal
+                    if(stringSymbol == null) {
+                        stringSymbol = character;                                                                       // If you were not already inside a string, declare initialization
+                        if(!acc.isEmpty()) {
+                            possibleTokens.add(asString(acc));                                                              // Add word to list and restart accumulator
+                            acc = new ArrayList<>();
+                        }
+                    }
+                    else {
+                        if (stringSymbol.equals(character)) stringSymbol = null;                                        // Else, you are trying to close a string (only valid if you're using the same delimiter)
+                        else acc.add(c);                                                                                     // or you're adding a character to the accumulated string
+                    }
+                }
+                acc.add(c);                                                                                             // Accumulate character
             }
         }
-
         return possibleTokens;
     }
 
@@ -88,5 +107,32 @@ public class LexerImpl implements Lexer {
         return characterList.stream()
                             .map(String::valueOf)
                             .collect(Collectors.joining());
+    }
+
+    /**
+     * '-' a.k.a Minus symbol is special.
+     *
+     * This helper method joins minus and a number if no whitespace is in between
+     * @param possibleTokens splat file into possible tokens
+     * @return splat file with joined negatives
+     */
+    private List<String> joinNegatives(List<String> possibleTokens) {
+        List<String> joinedNegatives = new ArrayList<>();
+
+        for (int i = 0; i < possibleTokens.size(); i++) {
+            String token = possibleTokens.get(i);
+
+            if(token.matches("-")){
+                String nextToken = possibleTokens.get(i+1);
+                if(nextToken.matches(Definitions.NUM_LITERAL_REGEX)) {
+                    joinedNegatives.add(token + nextToken);
+                    i++; continue;
+                }
+            }
+
+            joinedNegatives.add(token);
+        }
+
+        return joinedNegatives;
     }
 }

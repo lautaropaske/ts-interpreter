@@ -9,7 +9,7 @@ import handlers.rules.DeclarationAndAssignationRule;
 import tokens.Token;
 import java.util.List;
 
-public class DeclarationAssignationHandler extends Handler {
+public class DeclarationAssignationHandler extends Handler<ASTNode> {
 
     private ExpressionHandler expressionHandler;
 
@@ -20,6 +20,6 @@ public class DeclarationAssignationHandler extends Handler {
 
     @Override
     protected ASTNode parseNode(List<Token> statement) {
-        return new DeclarationAssignationStatement(new Identifier(statement.get(1).getValue()), Type.from(statement.get(3)), expressionHandler.handle(statement));
+        return new DeclarationAssignationStatement(new Identifier(statement.get(1).getValue()), Type.from(statement.get(3)), expressionHandler.handle(statement.subList(5,statement.size())));
     }
 }

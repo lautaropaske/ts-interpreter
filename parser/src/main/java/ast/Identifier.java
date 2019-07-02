@@ -15,6 +15,6 @@ public class Identifier implements ASTExpression {
 
     @Override
     public Object accept(ASTExpressionVisitor visitor, Map<String, Object> programMemory) {
-        return null;
+        return visitor.visit(this, programMemory);
     }
 }

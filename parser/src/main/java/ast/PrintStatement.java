@@ -1,10 +1,10 @@
 package ast;
 
 public class PrintStatement implements ASTNode {
-    private ASTExpression printable;
+    private ASTExpression expression;
 
-    public PrintStatement(ASTExpression printable) {
-        this.printable = printable;
+    public PrintStatement(ASTExpression expression) {
+        this.expression = expression;
     }
 
     @Override
@@ -12,5 +12,5 @@ public class PrintStatement implements ASTNode {
         visitor.visit(this);
     }
 
-    public ASTExpression getPrintable(){ return printable;}
+    public ASTExpression getExpression(){ return expression;}
 }

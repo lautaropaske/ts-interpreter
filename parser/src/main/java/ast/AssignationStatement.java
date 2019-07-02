@@ -5,9 +5,9 @@ public class AssignationStatement implements ASTNode {
     private Identifier identifier;
     private ASTExpression expression;
 
-    public AssignationStatement(Identifier identifier, Literal literal) {
+    public AssignationStatement(Identifier identifier, ASTExpression expression) {
         this.identifier = identifier;
-        this.expression = literal;
+        this.expression = expression;
     }
 
     @Override

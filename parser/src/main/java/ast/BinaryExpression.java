@@ -7,7 +7,7 @@ public class BinaryExpression implements ASTExpression {
     private BinaryOperation operation;
     private ASTExpression right;
 
-    public BinaryExpression(BinaryExpression left, BinaryOperation operation, BinaryExpression right) {
+    public BinaryExpression(ASTExpression left, BinaryOperation operation, ASTExpression right) {
         this.left = left;
         this.operation = operation;
         this.right = right;

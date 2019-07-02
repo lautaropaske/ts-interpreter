@@ -1,5 +1,6 @@
 package tokens;
 
+import exceptions.LexerException;
 import utils.Definitions;
 
 public class TokenFactory {
@@ -28,6 +29,6 @@ public class TokenFactory {
         if(str.matches(Definitions.STR_LITERAL_REGEX)) return new TokenImpl(TokenType.STR_LITERAL, coordinates, str);
         if(str.matches(Definitions.NUM_LITERAL_REGEX)) return new TokenImpl(TokenType.NUM_LITERAL, coordinates, str);
         if(str.matches(Definitions.IDENTIFIER_REGEX)) return new TokenImpl(TokenType.IDENTIFIER, coordinates, str);
-        return new TokenImpl(TokenType.UNKNOWN, coordinates, str);
+        throw new LexerException(str + ": unknown or invalid token type", coordinates[0], coordinates[1]);
     }
 }
