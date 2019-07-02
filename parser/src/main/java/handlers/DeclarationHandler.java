@@ -12,7 +12,7 @@ import java.util.List;
 public class DeclarationHandler extends Handler<ASTNode>{
 
     public DeclarationHandler(){
-        this.rule = new DeclarationRule();
+        super(new DeclarationRule());
     }
 
     @Override

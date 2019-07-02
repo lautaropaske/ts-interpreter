@@ -13,7 +13,7 @@ public class PrintHandler extends Handler<ASTNode>{
     private final ExpressionHandler expressionHandler;
 
     public PrintHandler(){
-        this.rule = new PrintRule();
+        super(new PrintRule());
         this.expressionHandler = new ExpressionHandler();
     }
 

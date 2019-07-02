@@ -25,7 +25,7 @@ public class ASTNodeFactory {
 
         switch (firstToken.getType()) {
             case LET:
-                if(statement.size() < 5) {
+                if(statement.size() <= 5) {
                     return declarationHandler.handle(statement); // If 5th token is not an 'equals', means we're only in a declaration
                 } else if (statement.get(4).getType() == TokenType.EQUALS){
                     return declarationAssignationHandler.handle(statement);

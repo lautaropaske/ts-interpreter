@@ -13,9 +13,8 @@ public enum TokenType {
     MULTIPLY,
     NUM_LITERAL,
     DIVIDE,
-    PRINT,
-    UNKNOWN,
     NEW_LINE,
+    PRINT,
     SPACE,
     COLON,
 }

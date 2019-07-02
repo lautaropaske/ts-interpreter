@@ -33,6 +33,7 @@ public class ParserImpl implements Parser {
             if(t.getType() == TokenType.SPACE) continue;
             if(t.getType() == TokenType.SEMICOLON || t.getType() == TokenType.NEW_LINE){
                 if(!acc.isEmpty()){
+                    if (t.getType() == TokenType.SEMICOLON) acc.add(t);
                     statements.add(acc);
                     acc = new ArrayList<>();
                 }
@@ -43,5 +44,4 @@ public class ParserImpl implements Parser {
 
         return statements;
     }
-
 }

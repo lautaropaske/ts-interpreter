@@ -2,6 +2,7 @@ package handlers;
 
 import ast.*;
 import exceptions.ParserException;
+import handlers.rules.Rule;
 import tokens.Token;
 import tokens.TokenType;
 import java.util.List;
@@ -9,6 +10,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ExpressionHandler extends Handler<ASTExpression> {
+
+    public ExpressionHandler() {
+        super(null);
+    }
 
     @Override
     protected ASTExpression parseNode(List<Token> expression) {

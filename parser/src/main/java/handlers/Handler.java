@@ -6,9 +6,14 @@ import tokens.Token;
 import java.util.List;
 
 public abstract class Handler<T> {
-    Rule rule;
+    private Rule rule;
+
+    Handler(Rule rule){
+        this.rule = rule;
+    }
 
     public T handle(List<Token> statement){
+        if(rule != null) rule.validate(statement);
         return parseNode(statement);
     }
 

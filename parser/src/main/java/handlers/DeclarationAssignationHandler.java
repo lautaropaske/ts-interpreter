@@ -14,7 +14,7 @@ public class DeclarationAssignationHandler extends Handler<ASTNode> {
     private ExpressionHandler expressionHandler;
 
     public DeclarationAssignationHandler(){
-        this.rule = new DeclarationAndAssignationRule();
+        super(new DeclarationAndAssignationRule());
         this.expressionHandler = new ExpressionHandler();
     }
 
