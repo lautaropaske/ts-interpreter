@@ -8,6 +8,11 @@ import org.junit.jupiter.api.Test;
 import parser.Parser;
 import parser.ParserImpl;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.util.ArrayList;
+
 public class InterpreterTest {
     private Lexer lexer = new LexerImpl();
     private Parser parser = new ParserImpl();
@@ -42,7 +47,7 @@ public class InterpreterTest {
             interpreter.interpret(ast);
         } catch (InterpreterException ex) {
             System.out.println("### EXPECTED EXCEPTION ###\n\n");
-            ex.printStackTrace();
+            System.out.println(ex.getMessage());
             System.out.println("\n");
         }
     }
@@ -58,7 +63,7 @@ public class InterpreterTest {
             interpreter.interpret(ast);
         } catch (InterpreterException ex) {
             System.out.println("### EXPECTED EXCEPTION ###\n\n");
-            ex.printStackTrace();
+            System.out.println(ex.getMessage());
         }
     }
 
@@ -86,16 +91,17 @@ public class InterpreterTest {
             interpreter.interpret(ast);
         } catch (InterpreterException ex) {
             System.out.println("### EXPECTED EXCEPTION ###\n\n");
-            ex.printStackTrace();
+            System.out.println(ex.getMessage());
         }
     }
 
     @Test
     public void pass_hardTest() {
-        String line = "let bar :number; let foo: string=\"foo string: \"; \n " +
-                      "print(foo);" +
-                      "bar = 10/2 + 5; \n" +
-                      "print(foo + bar + \' - baz\'); \n";
+        String line = "let bar: number = 5;\n" +
+                      "let foo: string = 'foo string: ';\n" +
+                      "print(\"Hola \" + 5);\n" +
+                      "bar = 10 / 2 * 5;\n" +
+                      "print(foo + bar + ' - baz');\n";
 
         ASTNode ast = this.parser.parse(lexer.lex(line));
 

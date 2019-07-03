@@ -24,7 +24,6 @@ public class ParserImpl implements Parser {
         return program;
     }
 
-    // TODO Did logic while sleepy, check for bugs
     private List<List<Token>> formStatements(List<Token> tokens) {
         List<List<Token>> statements = new ArrayList<>();
         List<Token> acc = new ArrayList<>();

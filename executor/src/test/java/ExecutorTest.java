@@ -8,8 +8,10 @@ public class ExecutorTest {
 
         String program = "let foo : number= 5;\n" +
                          "let bar :number = foo + 4;\n" +
-                         "print(bar + \"is a\" + \'word\');\n";
+                         "print(\"This is the \" + \'result: \' + bar);\n";
 
+        System.out.println("\n### EXPECTING SUCCESS ###\n");
         executor.execute(program);
+        System.out.println("\n");
     }
 }

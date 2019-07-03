@@ -1,6 +1,5 @@
 package lexer;
 
-import exceptions.LexerException;
 import javafx.util.Pair;
 import tokens.Token;
 import tokens.TokenFactory;
@@ -71,7 +70,7 @@ public class LexerImpl implements Lexer {
         for (char c: file.toCharArray()) {
             String character = String.valueOf(c);
 
-            if ((DELIMITER_LIST.contains(character) || SYMBOL_LIST.contains(character)) && stringSymbol == null) {      // You found a delimiter/symbol
+            if ((DELIMITER_LIST.contains(character) || SYMBOL_LIST.contains(character)) && stringSymbol == null) {      // You found a delimiter/symbol, and you're not inside a string
                 if(!acc.isEmpty()) {
                     possibleTokens.add(asString(acc));                                                                  // This means you are closing an accumulated word. Add word to list
                     acc = new ArrayList<>();                                                                            // Restart accumulator
@@ -80,15 +79,15 @@ public class LexerImpl implements Lexer {
             } else {                                                                                                    // If you didn't find delimiter/symbol, you found a character
                 if(STRING_SYMBOL_LIST.contains(character)){                                                             // If you found a string delimiter, you might be entering a string literal
                     if(stringSymbol == null) {
-                        stringSymbol = character;                                                                       // If you were not already inside a string, declare initialization
+                        stringSymbol = character;                                                                       // If you were not already inside a string, declare it's initialization
                         if(!acc.isEmpty()) {
-                            possibleTokens.add(asString(acc));                                                              // Add word to list and restart accumulator
+                            possibleTokens.add(asString(acc));                                                          // Add word to list and restart accumulator
                             acc = new ArrayList<>();
                         }
                     }
                     else {
                         if (stringSymbol.equals(character)) stringSymbol = null;                                        // Else, you are trying to close a string (only valid if you're using the same delimiter)
-                        else acc.add(c);                                                                                     // or you're adding a character to the accumulated string
+                        else acc.add(c);                                                                                // or you're adding a character to the accumulated string
                     }
                 }
                 acc.add(c);                                                                                             // Accumulate character
