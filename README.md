@@ -1,4 +1,4 @@
-ts-interpreter
+TS interpreter :memo::arrow_right::computer:
 =
 
 Final project - 'Ingenería de Sistemas', Universidad Austral 2019.
